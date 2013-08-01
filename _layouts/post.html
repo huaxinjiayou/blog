@@ -11,7 +11,7 @@ layout: default
 </div>
 <div class="mb30">
    {% for tag in page.tags %}
-        <a href="/tag.html#{{tag}}" class="mr10">{{tag}} ({{site.tags[tag] | size}})</a>
+        <a href="/blog/tag.html#{{tag}}" class="mr10">{{tag}} ({{site.tags[tag] | size}})</a>
    {% endfor %}
 </div>
 
@@ -20,7 +20,7 @@ layout: default
         <li class="li-item li-title">相关文章</li>
     {% for post in site.related_posts limit:5 %}
         <li class="clearfix li-item li-info">
-            <a href="blog{{ post.url }}">{{ post.title }}</a>
+            <a href="/blog{{ post.url }}">{{ post.title }}</a>
             <span class="right">{{ post.date | date:"%Y-%m-%d"}}</span>
         </li>
     {% endfor %}
