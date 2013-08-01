@@ -1,0 +1,131 @@
+html, body, ul, li, ol, table, tr, td, form, p, h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+}
+input, button, a {
+    outline: none;
+}
+a{
+    color: #37a;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+a img{
+    border: none;
+}
+ul{
+    list-style: none;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.text-right{
+    text-align: right;
+}
+
+.ml10{
+    margin-left: 10px;
+}
+.mr10{
+    margin-right: 10px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.ml20{
+    margin-left: 20px;
+}
+.mb30{
+    margin-bottom: 30px;
+}
+
+
+
+html{
+    background: url(../image/bg-body.png) repeat 0 0 #f4f4f4;
+}
+body{
+    background: url(../image/bg-body.png) repeat 0 0 #f4f4f4;
+    font-size: 16px;
+    font-family: Georgia,"Times New Roman",Times,"Songti SC","SimSun",serif;
+    line-height: 28px;
+}
+.header, .container, .footer{
+    width: 1000px;
+    margin: 0 auto;
+}
+.header{
+    height: 50px;
+    line-height: 50px;
+}
+.blog-title{
+    font-size: 30px;
+}
+.container{
+    margin: 30px atuo;
+}
+
+.li-item{
+    padding: 5px 0;
+    display: block;
+}
+.li-title{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-top: 10px;
+}
+.li-info{
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #fff;
+}
+.li-info:hover{
+    background: #eee;
+}
+.post-title{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 50px;
+}
+.post-info{
+    color: #aaa;
+}
+
+/*底部*/
+.footer{
+    width: 1000px;
+    margin: 20px auto 0;
+    padding: 20px 0 40px;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #555;
+    background: url(../image/bg-line.gif) repeat-x 0 top;
+}
+.footer a{
+    color: #555;
+}
+.footer a:hover{
+    color: #000;
+    text-decoration: none;
+}
+.footer .right{
+    text-align: right;
+}
