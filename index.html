@@ -1,0 +1,22 @@
+---
+layout: default
+title: 华鑫的博客
+---
+
+{% for post in site.posts %}
+<ul class="post-list">
+    {% unless post.next %}
+        <li class="li-item li-title">{{ post.date | date: '%Y' }}</li>
+    {% else %}
+        {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+        {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+        {% if year != nyear %}
+            <li class="li-item li-title">{{ post.date | date: '%Y' }}</li>
+        {% endif %}
+    {% endunless %}
+    <li class="clearfix li-item li-info">
+        <a href="{{ post.url }}">{{ post.title }}</a><span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
+    </li>
+
+</ul>
+{% endfor %}

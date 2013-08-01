@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<div class="clearfix">
+    <span class="post-title">{{ page.title }}</span>
+    <span class="ml10 post-info">{{ page.date | date:"%Y-%m-%d" }}</span>
+</div>
+
+<div class="mb10">
+{{ content }}
+</div>
+<div class="mb30">
+   {% for tag in page.tags %}
+        <a href="/tag.html#{{tag}}" class="mr10">{{tag}} ({{site.tags[tag] | size}})</a>
+   {% endfor %}
+</div>
+
+<div class="post-relations">
+    <ul class="post-list">
+        <li class="li-item li-title">相关文章</li>
+    {% for post in site.related_posts limit:5 %}
+        <li class="clearfix li-item li-info">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            <span class="right">{{ post.date | date:"%Y-%m-%d"}}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
