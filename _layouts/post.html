@@ -20,8 +20,8 @@ layout: default
         <li class="li-item li-title">相关文章</li>
     {% for post in site.related_posts limit:5 %}
         <li class="clearfix li-item li-info">
-            <a href="/blog{{ post.url }}">{{ post.title }}</a>
-            <span class="right">{{ post.date | date:"%Y-%m-%d"}}</span>
+            <span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
+            <a href="/blog{{ post.url }}" class="left">{{ post.title }}</a>
         </li>
     {% endfor %}
     </ul>
