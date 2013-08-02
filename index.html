@@ -15,7 +15,8 @@ title: 华鑫的博客
         {% endif %}
     {% endunless %}
     <li class="clearfix li-item li-info">
-        <a href="/blog{{ post.url }}">{{ post.title }}</a><span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
+        <span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
+        <a href="/blog{{ post.url }}" class="left">{{ post.title }}</a>
     </li>
 
 </ul>
