@@ -15,9 +15,6 @@ a:hover{
 a img{
     border: none;
 }
-ul{
-    list-style: none;
-}
 .left{
     float: left;
 }
@@ -77,9 +74,11 @@ body{
     font-size: 30px;
 }
 .container{
-    margin: 30px atuo;
+    margin: 30px auto;
 }
-
+.post-list{
+    list-style: none;
+}
 .li-item{
     padding: 5px 0;
     display: block;
