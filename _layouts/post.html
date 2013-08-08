@@ -14,6 +14,22 @@ layout: default
         <a href="/blog/tag.html#{{tag}}" class="mr10">{{tag}} ({{site.tags[tag] | size}})</a>
    {% endfor %}
 </div>
+<div class="mb30">
+<!-- Duoshuo Comment BEGIN -->
+    <div class="ds-thread" data-title="{{ page.title }}" data-url="/blog{{ page.url }}"></div>
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"huaxinblog"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+<!-- Duoshuo Comment END -->
+</div>
 
 <div class="post-relations">
     <ul class="post-list">
