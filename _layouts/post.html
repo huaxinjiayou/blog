@@ -14,7 +14,20 @@ layout: default
         <a href="/blog/tag.html#{{tag}}" class="mr10">{{tag}} ({{site.tags[tag] | size}})</a>
    {% endfor %}
 </div>
-<div class="mb30">
+
+<div class="post-relations mb30">
+    <ul class="post-list">
+        <li class="li-item li-title">相关文章</li>
+    {% for post in site.related_posts limit:5 %}
+        <li class="clearfix li-item li-info">
+            <span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
+            <a href="/blog{{ post.url }}" class="left">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div>
 <!-- Duoshuo Comment BEGIN -->
     <div class="ds-thread" data-title="{{ page.title }}" data-url="/blog{{ page.url }}"></div>
     <script type="text/javascript">
@@ -29,16 +42,4 @@ layout: default
         })();
     </script>
 <!-- Duoshuo Comment END -->
-</div>
-
-<div class="post-relations">
-    <ul class="post-list">
-        <li class="li-item li-title">相关文章</li>
-    {% for post in site.related_posts limit:5 %}
-        <li class="clearfix li-item li-info">
-            <span class="right">{{ post.date | date:"%Y-%m-%d" }}</span>
-            <a href="/blog{{ post.url }}" class="left">{{ post.title }}</a>
-        </li>
-    {% endfor %}
-    </ul>
 </div>
