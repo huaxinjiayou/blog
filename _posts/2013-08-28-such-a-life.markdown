@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "两种生活"
-date:   2013-08-27
+date:   2013-08-28
 tags: 生活
 ---
 
