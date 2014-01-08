@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>最近遇到的一些js异步管理工具</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/blog/css/syntax.css">
+        <link rel="stylesheet" href="/blog/css/main.css">
+    </head>
+    <body>
+
+        <div class="header clearfix">
+            <h1 class="blog-title left"><a href="/blog">华鑫的博客</a></h1>
+            <a class="ml20 left" href="https://github.com/huaxinjiayou/blog">source on github</a>
+        </div>
+
+        <div class="container">
+                <div class="clearfix">
+    <span class="post-title">最近遇到的一些js异步管理工具</span>
+    <span class="ml10 post-info">2014-01-08</span>
+</div>
+
+<div class="mb10">
+<p>使用express写一个小网站，然后不可避免遇到了异步的问题，严格的说是异步的书写问题…</p>
+
+<p>先是直接使用回调，虽然自己做了分层（比如把两三个回调包装在一个function，形成一个新的回调，尽量减少可见的回调层级），代码那个长就不说了，而且很冗余…</p>
+
+<p>然后就开始寻求库的帮助…</p>
+
+<ul>
+<li><a href="https://github.com/JacksonTian/eventproxy">eventproxy.js</a></li>
+</ul>
+
+<p>开始接触nodejs，直接clone了<a href="https://github.com/cnodejs/nodeclub">cnode社区的代码</a>，里面用的就是这个，然后就试着用了…</p>
+
+<p>挺不错的，但是不喜欢它的接口结构，比如，摘抄一段<a href="https://github.com/cnodejs/nodeclub/blob/master/proxy/topic.js">代码</a>…</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventProxy</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">events</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;last_reply&#39;</span><span class="p">];</span>
+<span class="nx">proxy</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">events</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">tags</span><span class="p">,</span> <span class="nx">author</span><span class="p">,</span> <span class="nx">last_reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// …</span>
+<span class="p">});</span>
+
+<span class="nx">proxy</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="err">…</span><span class="p">);</span>
+<span class="nx">proxy</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="err">…</span><span class="p">);</span>
+<span class="err">…</span>
+</code></pre></div>
+
+<ul>
+<li>when.js</li>
+</ul>
+
+<p>波波推荐的，在async.js和when.js中2选一，然后google一下，when最符合Promises/A+规范，估计是好东西，就直接用了…</p>
+
+<p>在使用过程中也开始了解Promises/A+规范讲的是啥…</p>
+
+<p>就按照规范使用的话，确实是个好帮手，但是放在express中，发现自己还得写挺多一些额外的辅助代码… 比如异步的错误处理机制…</p>
+
+<p>没错，是错误处理机制！！！</p>
+
+<p>大多数时候，我需要在第一次出现错误之后，就不执行之后的任何操作，直接终止，但是</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">startPromise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">fSuccess1</span><span class="p">,</span> <span class="nx">fFail1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">fSuccess2</span><span class="p">,</span> <span class="nx">fFail2</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">fSuccess3</span><span class="p">,</span> <span class="nx">fFail3</span><span class="p">)</span><span class="err">…</span>
+</code></pre></div>
+
+<p>不做任何操作的话，fFail1执行完之后，默认是接着执行fSuccess2或者fFail2，因此需要我做一些额外的管理工作…</p>
+
+<p>我要想做异步管理的话，我还用个毛库啊，摔…</p>
+
+<p>此外，每个异步生成一个defer对象，在我看来是有点冗余，虽然在规范看来不是…</p>
+
+<ul>
+<li>async.js</li>
+</ul>
+
+<p>在自己封装了一遍when.js之后，发现自己有重复造轮子的趋势(虽然已经快造好了…)，然后就又试了一下async.js</p>
+
+<p>简单的说就是和我期望的一样，所以很好，呵呵…</p>
+
+<p>有以下这3个方法我已经很满足了…</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// 按照顺序执行，前一次的执行结果为下一个函数的执行参数</span>
+<span class="nx">async</span><span class="p">.</span><span class="nx">waterfall</span>
+
+<span class="c1">// 并行(不按照顺序)执行，但是结果按照指定的Array顺序(或者Object键)返回</span>
+<span class="nx">async</span><span class="p">.</span><span class="nx">parallel</span>
+
+<span class="c1">// 串行执行</span>
+<span class="nx">async</span><span class="p">.</span><span class="nx">series</span>
+</code></pre></div>
+
+<p>嗯，确实跟我的想法一致：代码看起来要舒服…</p>
+
+<p>附截图2张，起码现在我看着挺舒服，说不定日后还会发现不爽的地方，唉，可怜的处女座…</p>
+
+<p><img src="https://raw.github.com/huaxinjiayou/blog/gh-pages/image/async-code.png" alt="代码截图"></p>
+
+<p><img src="https://raw.github.com/huaxinjiayou/blog/gh-pages/image/async-page.png" alt="前端界面截图"></p>
+
+</div>
+<div class="mb30">
+   
+        <a href="/blog/tag.html#javascript" class="mr10">javascript (2)</a>
+   
+</div>
+
+<div class="post-relations mb30">
+    <ul class="post-list">
+        <li class="li-item li-title">相关文章</li>
+    
+        <li class="clearfix li-item li-info">
+            <span class="right">2013-08-31</span>
+            <a href="/blog/2013/08/31/reader-update-list.html" class="left">开发进度日志</a>
+        </li>
+    
+        <li class="clearfix li-item li-info">
+            <span class="right">2013-08-28</span>
+            <a href="/blog/2013/08/28/such-a-life.html" class="left">两种生活</a>
+        </li>
+    
+        <li class="clearfix li-item li-info">
+            <span class="right">2013-08-27</span>
+            <a href="/blog/2013/08/27/wanglijun.html" class="left">其实挺可怜的</a>
+        </li>
+    
+        <li class="clearfix li-item li-info">
+            <span class="right">2013-08-04</span>
+            <a href="/blog/2013/08/04/yan-duan-ju.html" class="left">一些感想</a>
+        </li>
+    
+        <li class="clearfix li-item li-info">
+            <span class="right">2013-08-03</span>
+            <a href="/blog/2013/08/03/shen-me-is-right.html" class="left">三分钟热度之蛋蛋哀伤的周五</a>
+        </li>
+    
+    </ul>
+</div>
+
+<div>
+<!-- Duoshuo Comment BEGIN -->
+    <div class="ds-thread" data-title="最近遇到的一些js异步管理工具" data-url="/blog/2014/01/08/talk-about-js-async-lib.html"></div>
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"huaxinblog"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+<!-- Duoshuo Comment END -->
+</div>
+
+        </div>
+
+
+        <div class="footer" class="clearfix">
+            <div class="left">
+              黄华鑫 · lucas<br />
+              <a href="http://mail.163.com/share/mail2me.htm#email=104117097120105110106105097121111117064049050054046099111109" target="_blank">huaxinjiayou@126.com</a>
+            </div>
+            <div class="right text-right">
+                <a href="http://jser.me" target="_blank">草依山的Javascript世界</a>    ·    
+                <a href="http://weibo.com/huaxin1989" target="_blank">新浪微博</a>    ·    
+                <a href="http://www.renren.com/255510050" target="_blank">人人</a><br />
+                <span>嘿嘿...又一个博客</span>
+            </div>
+        </div>
+
+    </body>
+</html>
