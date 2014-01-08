@@ -29,7 +29,7 @@ proxy.emit('tags', …);
 …
 {% endhighlight %}
 
-* when.js
+* [when.js](https://github.com/cujojs/when)
 
 波波推荐的，在async.js和when.js中2选一，然后google一下，when最符合Promises/A+规范，估计是好东西，就直接用了…
 
@@ -51,7 +51,7 @@ startPromise.then(fSuccess1, fFail1).then(fSuccess2, fFail2).then(fSuccess3, fFa
 
 此外，每个异步生成一个defer对象，在我看来是有点冗余，虽然在规范看来不是…
 
-* async.js
+* [async.js](https://github.com/caolan/async)
 
 在自己封装了一遍when.js之后，发现自己有重复造轮子的趋势(虽然已经快造好了…)，然后就又试了一下async.js
 
