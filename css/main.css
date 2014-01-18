@@ -82,6 +82,13 @@ body{
 .post-list{
     list-style: none;
 }
+.post-content p{
+    margin: 10px 0;
+}
+.post-content img{
+    border: 1px solid #ccc;
+    padding: 5px;
+}
 .li-item{
     padding: 5px 0;
     display: block;
