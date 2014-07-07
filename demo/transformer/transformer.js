@@ -32,9 +32,11 @@
         var that = this;
 
         // 一些链接
-        // that.baseUrl = 'http://www.baidu.com/aladdin/img/transformer/';
-        that.baseUrl = 'images/'
-        that.closeBg = that.baseUrl + 'close.png';
+        // that.baseUrl = 'images/'
+        // that.closeBg = that.baseUrl + 'close.png';
+
+        that.baseUrl = 'http://www.baidu.com/aladdin/img/transformer/';
+        that.closeBg = that.baseUrl + 'img/close.png';
 
         // 信息
         that.data = {
@@ -45,7 +47,7 @@
         that.curStep = 0; // R 执行步骤
         that.totalStep = 101; // 全部步骤
         that.totalImageCount = 25; // 全部图片数量
-        that.startCount = 25; // 加载的图片数量，达到这个数量就可以开始了
+        that.startCount = 20; // 加载的图片数量，达到这个数量就可以开始了
         that.duration = 80; // 动画的执行间隔
         that.pauseDuration = 800;
 
@@ -140,7 +142,7 @@
 
                     // 加载到一定数量，开始
                     if (nLoaded === that.startCount) {
-                        that._setTimeout('run', that.duration);
+                        that._setTimeout('run', 500);
                     }
                 }
             })(i);
