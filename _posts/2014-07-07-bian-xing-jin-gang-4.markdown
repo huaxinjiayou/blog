@@ -13,11 +13,11 @@ tags: javascript
 
 之前谷歌也用相同原理实现一个logo效果，当时仿写了一个，如下：
 
-[点击查看](https://raw.github.com/huaxinjiayou/blog/gh-pages/demo/horse/index.html)
+[点击查看](http://huaxinjiayou.github.io/blog/demo/horse/index.html)
 
 百度的这个素材这么丰富，我当然也要仿写一个保留着哈：
 
-[点击查看](https://raw.github.com/huaxinjiayou/blog/gh-pages/demo/horse/index.html)
+[点击查看](http://huaxinjiayou.github.io/blog/demo/transformer/index.html)
 
 不过看了百度的实现源代码，还是有槽点：
 
